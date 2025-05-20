@@ -1,0 +1,15 @@
+To do:
+  Shouldn't be too hard to implement:
+  - Function to insert at front and end of linked list.
+  - Function to delete a node by value.
+  - Function to count amount of nodes.
+  
+  A bit more advanced:
+  - Function to search for a value, return position or -1 if not found.
+  - Reverse the list.
+  - Sort the list by id.
+  - Let the user build the list.
+
+  Well in the future:
+  - Implement a doubly linked list.
+  - Implement a circular linked list.
