@@ -1,8 +1,8 @@
 To do:
   Shouldn't be too hard to implement:
-  - Function to insert at front and end of linked list.
-  - Function to delete a node by value.
-  - Function to count amount of nodes.
+  - Function to insert at front and end of linked list. - End is working 22/05/2025
+  - Function to delete a node by value. -
+  - Function to count amount of nodes. - Completed 21/05/2025
   
   A bit more advanced:
   - Function to search for a value, return position or -1 if not found.

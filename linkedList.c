@@ -42,12 +42,50 @@ void freeList(struct Node* head){//Loops through each item in the linked list an
 
   while(current != NULL){
     nextNode = current -> next;
+    printf("Freed node at id: %d\n", current -> id);
     free(current);
     current = nextNode;
   }
 }
 
+int countNode(struct Node* head){
+  struct Node* nextNode;
+  struct Node* current = head;
+  int nodeCount = 0;
 
+  while(current != NULL){
+    nextNode = current -> next;
+    nodeCount++;
+    current = nextNode;
+  }
+  printf("Finished counting, the total amount of nodes is %d\n", nodeCount);
+  return nodeCount;
+}
+
+void insertEnd(struct Node* head){
+  // Needs work !
+  struct Node* current = head;
+  
+  char userId[5];
+  printf("Enter the id you want the new node to be: ");
+  fgets(userId, sizeof(userId), stdin);
+  printf("You entered %s", userId);
+  int validatedUserId = atoi(userId);
+
+  struct Node* newNode = malloc(sizeof(struct Node));
+  mallocCheck(newNode);
+  createNode(newNode,validatedUserId,NULL);
+  
+  while(current != NULL){
+    if(current -> next == NULL){
+      current -> next = newNode;
+      printf("Added a new node !\n");
+      break;
+    } else {
+      current = current -> next;
+    }
+  } 
+}
 //---- Main ----//
 int main () {  
   //---- Creating list items ----//
@@ -70,7 +108,11 @@ int main () {
 
   //---- Print list ----//
   printList(head);
-  
+  countNode(head); 
+
+  insertEnd(head);
+  printList(head);
+  countNode(head); 
   //---- Free list ----//
   freeList(head);
   return SUCCESS;

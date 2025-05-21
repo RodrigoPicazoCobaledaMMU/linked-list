@@ -5,6 +5,7 @@ SRC = linkedList.c
 
 make: 
 	$(CC) $(FLAGS) -o $(TARGET) $(SRC)
-
+debug:
+	$(CC) -g $(FLAGS) -o $(TARGET) $(SRC)
 clean:
 	rm $(TARGET)
