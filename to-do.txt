@@ -1,10 +1,11 @@
 To do:
   Shouldn't be too hard to implement:
   - Function to insert at front and end of linked list. - End is working 22/05/2025
-  - Function to delete a node by value. - Delete node by value is working now, just needs some slight improvments in the future
+  - Function to delete a node by value. - Delete node by value is working now, just needs some slight improvments in the future 28/05/2025
   - Function to count amount of nodes. - Completed 21/05/2025
   
   A bit more advanced:
+  - Menu - Menu is now working 28/05/2025
   - Function to search for a value, return position or -1 if not found.
   - Reverse the list.
   - Sort the list by id.

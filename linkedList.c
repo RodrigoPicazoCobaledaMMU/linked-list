@@ -1,11 +1,9 @@
 //---- Libraries ----//
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 //---- Defines ----//
 #define MALLOC_FAILURE 1
-#define SUCCESS 0
 
 //---- Node struct ----//
 struct Node {
@@ -14,6 +12,9 @@ struct Node {
 };
 
 //---- Functions ----//
+
+
+//-- Check if Malloc was successful --//
 void mallocCheck(struct Node* node){ //Checks if malloc returns NULL, closes down program if so
   if(node == NULL){
     printf("Failure during malloc, shutting down.");
@@ -21,11 +22,14 @@ void mallocCheck(struct Node* node){ //Checks if malloc returns NULL, closes dow
   }
 }
 
+//-- Function used to insert data to a node --//
 void createNode(struct Node* node, int enteredId, struct Node* nextNode){ //Creates each node in list
   node -> id = enteredId;
   node -> next = nextNode;
 }
 
+
+//-- Prints entire list and stops at NULL --//
 void printList(struct Node* head){//Loops through every item in the list and prints until it reaches NULL 
   struct Node* current = head;
   
@@ -36,6 +40,8 @@ void printList(struct Node* head){//Loops through every item in the list and pri
   printf("NULL\n");
 }
 
+
+//-- Loops through each element in a list and frees them from heap --//
 void freeList(struct Node* head){//Loops through each item in the linked list and frees until it reaches NULL
   struct Node* nextNode;
   struct Node* current = head;
@@ -48,12 +54,14 @@ void freeList(struct Node* head){//Loops through each item in the linked list an
   }
 }
 
+
+//-- Loops through list and counts how many nodes exist --//
 int countNode(struct Node* head){
   struct Node* nextNode;
   struct Node* current = head;
   int nodeCount = 0;
 
-  while(current != NULL){
+  while(current != NULL){ // While current isn't null, add one to the node count
     nextNode = current -> next;
     nodeCount++;
     current = nextNode;
@@ -62,22 +70,22 @@ int countNode(struct Node* head){
   return nodeCount;
 }
 
+//-- Insert to the end of a linked list --//
 void insertEnd(struct Node* head){
   // Needs work !
   struct Node* current = head;
   
   char userId[5];
   printf("Enter the id you want the new node to be: ");
-  fgets(userId, sizeof(userId), stdin);
-  printf("You entered %s", userId);
+  scanf("%4s", userId);
   int validatedUserId = atoi(userId);
 
   struct Node* newNode = malloc(sizeof(struct Node));
   mallocCheck(newNode);
-  createNode(newNode,validatedUserId,NULL);
+  createNode(newNode,validatedUserId,NULL); // New node is created and given data
   
   while(current != NULL){
-    if(current -> next == NULL){
+    if(current -> next == NULL){ // If the next node is NULL then set the next pointer of current node to the new node 
       current -> next = newNode;
       printf("Added a new node !\n");
       break;
@@ -87,13 +95,14 @@ void insertEnd(struct Node* head){
   } 
 }
 
+//-- Delete a node --//
 void deleteNode(struct Node* head){
-  struct Node* currentNode = head; // 1
+  struct Node* currentNode = head;
 
   char tempInput[5];
   int nodeChosen;
   printf("Enter the node you want to delete:\n");
-  fgets(tempInput, sizeof(nodeChosen), stdin);
+  scanf("%4s", tempInput);
   nodeChosen = atoi(tempInput);
 
   if(nodeChosen == 1){
@@ -104,48 +113,12 @@ void deleteNode(struct Node* head){
       struct Node* tempNode = currentNode -> next;
 
       if(tempNode -> id == nodeChosen){ //if the id is the same as the chosen node
-        printf("Found node chosen at current id:%d and next id: %d\n", currentNode -> id, tempNode -> id);
         currentNode -> next = tempNode -> next; // The next pointer for the current pointer will be the next pointer for the tempNode
         tempNode -> next = NULL; // tempNode pointer is now updated to be null
-        free(tempNode);
+        free(tempNode); // free from memory
         break;
       }
       currentNode = currentNode -> next; //makes the current node the next node in the list
     }
   }
-}
-//---- Main ----//
-int main () {  
-  //---- Creating list items ----//
-  struct Node* head = malloc(sizeof(struct Node));
-  struct Node* second = malloc(sizeof(struct Node));
-  struct Node* third = malloc(sizeof(struct Node));
-  struct Node* fourth = malloc(sizeof(struct Node));
-
-  //---- Check for malloc failure ----//
-  mallocCheck(head);
-  mallocCheck(second);
-  mallocCheck(third);
-  mallocCheck(fourth);
-
-  //---- Adding to list items ----//
-  createNode(head, 1, second);
-  createNode(second, 2, third);
-  createNode(third, 3, fourth);
-  createNode(fourth, 4, NULL);
-
-  //---- Print list ----//
-  printList(head);
-  countNode(head); 
-
-  insertEnd(head);
-  printList(head);
-  countNode(head);
-
-  deleteNode(head);
-  printList(head); 
-  countNode(head); 
-  //---- Free list ----//
-  freeList(head);
-  return SUCCESS;
 }
