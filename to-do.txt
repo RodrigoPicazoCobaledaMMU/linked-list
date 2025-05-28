@@ -1,7 +1,7 @@
 To do:
   Shouldn't be too hard to implement:
   - Function to insert at front and end of linked list. - End is working 22/05/2025
-  - Function to delete a node by value. -
+  - Function to delete a node by value. - Delete node by value is working now, just needs some slight improvments in the future
   - Function to count amount of nodes. - Completed 21/05/2025
   
   A bit more advanced:

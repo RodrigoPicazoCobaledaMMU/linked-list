@@ -86,6 +86,34 @@ void insertEnd(struct Node* head){
     }
   } 
 }
+
+void deleteNode(struct Node* head){
+  struct Node* currentNode = head; // 1
+
+  char tempInput[5];
+  int nodeChosen;
+  printf("Enter the node you want to delete:\n");
+  fgets(tempInput, sizeof(nodeChosen), stdin);
+  nodeChosen = atoi(tempInput);
+
+  if(nodeChosen == 1){
+    printf("Node chosen can't be the head of the linked list\n");
+  } else{
+
+    while(currentNode -> id != nodeChosen){ //loops through linked list until currentNode id is the node chosen for deletion
+      struct Node* tempNode = currentNode -> next;
+
+      if(tempNode -> id == nodeChosen){ //if the id is the same as the chosen node
+        printf("Found node chosen at current id:%d and next id: %d\n", currentNode -> id, tempNode -> id);
+        currentNode -> next = tempNode -> next; // The next pointer for the current pointer will be the next pointer for the tempNode
+        tempNode -> next = NULL; // tempNode pointer is now updated to be null
+        free(tempNode);
+        break;
+      }
+      currentNode = currentNode -> next; //makes the current node the next node in the list
+    }
+  }
+}
 //---- Main ----//
 int main () {  
   //---- Creating list items ----//
@@ -112,6 +140,10 @@ int main () {
 
   insertEnd(head);
   printList(head);
+  countNode(head);
+
+  deleteNode(head);
+  printList(head); 
   countNode(head); 
   //---- Free list ----//
   freeList(head);
